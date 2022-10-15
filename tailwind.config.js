@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [
-    require('tailwindcss/defaultConfig'), require('xtendui/tailwind.preset'), require('flowbite/plugin')
+    require('tailwindcss/defaultConfig'), require('flowbite/plugin')
   ],
   content: [
     './node_modules/xtendui/src/*.mjs',
@@ -16,7 +16,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Mulish', 'sans-serif'],
+        sans: ['GolosTextWebVF', 'sans-serif'],
         serif: ['Lora', 'serif']
       },
       colors: {

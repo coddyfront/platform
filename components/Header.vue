@@ -1,22 +1,31 @@
 <template>
-    <header class="my-2 mx-4 bg-transparent  ">
-    <nav class=" ring-neutral-800 ring-2  px-4 lg:px-9 py-6 backdrop-blur-2xl  backdrop-opacity-80 rounded-2xl w-full text">
+    <header class="my-2 mx-2 lg:mx-8  bg-transparent  ">
+    <nav class=" ring-neutral-800 ring-2  px-4 lg:px-9 py-4 lg:py-6 backdrop-blur-2xl  backdrop-opacity-80 rounded-2xl w-full text">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <NuxtLink to="/" class="n-link-base flex items-center " > 
                 <span  class="mr-3 h-6 w-6 bg-primary-200 sm:h-9 sm:w-9 rounded-full" alt="Flowbite Logo" ></span>
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white text">CODDY LEARN</span>
+                <span class="self-center  text-xl font-semibold whitespace-nowrap dark:text-white text">CODDY LEARN</span>
             </NuxtLink>
-            <div class="flex items-center lg:order-2 gap-4" v-if="!smallerThanLg">
-                <a href="#" class=" py-2.5 px-3.5 text-xl rounded-md font-medium leading-snug tracking-wide  text-white ring-neutral-800 ring-2 transition  hover:ring-primary-500 active:bg-neutral-900 active:ring-neutral-700 ">Войти</a>
-                <a href="#" class=" py-2.5 px-3.5 text-xl rounded-md font-medium leading-snug tracking-wide  text-white ring-primary-500 ring-2 transition bg-primary-500">Регистрация</a>
+            <div :class="['lg:flex hidden items-center lg:order-2 gap-4  ']"  >
+                <NuxtLink to="/" class=" py-2.5 px-3.5 text-xl rounded-md font-medium leading-snug tracking-wide  text-white ring-neutral-800 ring-2 transition  hover:ring-primary-500 active:bg-neutral-900 active:ring-neutral-700 ">Войти</NuxtLink>
+                <NuxtLink to="/" class=" py-2.5 px-3.5 text-xl rounded-md font-medium leading-snug tracking-wide  text-white ring-primary-500/95 ring-2 transition bg-primary-500">Регистрация</NuxtLink>
             </div>
-            <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+            <Menu :class="'visible' ? nonDesktop: ''" />
+            <!-- <button v-if="!isDesktop" type="button" class=" flex  relative items-center p-2 w-8 h-8 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" @click="toggle()">
                     <span class="sr-only">Открыть главное меню</span>
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                    <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                </button>
+                    <div :class="[' transition-all  ease absolute w-full h-full flex items-center justify-center top-0 left-0 duration-300', value ? 'rotate-45 translate-y-3  opacity-0' : '' ]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                        </svg>
+                    </div>
+                    <div  :class="[' transition-all flex items-center justify-center w-full h-full top-0 left-0 absolute ease transform duration-300', value ? '' : '-rotate-45 translate-y-3 opacity-0 ' ]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </button> -->
             <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" ref="list_of_links">
-                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 tracking-wide">
                     <li>
                         <NuxtLink to="/" class="n-link-base"> coddy </NuxtLink>
                     </li>
@@ -44,18 +53,15 @@
 </template>
 
 <script setup>
-import { breakpointsTailwind, useBreakpoints  } from '@vueuse/core';
+import { breakpointsTailwind, useBreakpoints, useToggle  } from '@vueuse/core';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { ref, watchEffect, onMounted } from 'vue'  
-const route = useRoute(); 
+import { watchEffect, onMounted,   } from 'vue'  
 const breakpoints = useBreakpoints(breakpointsTailwind);
-const smallerThanLg = breakpoints.smaller('lg')
-const list_of_links = ref()
+const isDesktop = breakpoints.greater('lg')
+const nonDesktop = breakpoints.smaller('lg')
+const [value, toggle] = useToggle();
 onMounted(()=> {
-console.log(list_of_links)
-});
-watchEffect(()=> {
-    if (smallerThanLg) console.log(123123123)
+    
 })
 </script>
 <style scoped>

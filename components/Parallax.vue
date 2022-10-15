@@ -1,27 +1,24 @@
 <template>
-   <div>
-    <div ref="target" :style="targetStyle">
-        <div :style="containerStyle">
-            <div :style="cardWindowStyle">
-                <img
-              :style="layer0"
-              src="https://jaromvogel.com/images/design/jumping_rabbit/page2layer0.png"
-              alt=""
-            >
-            <img
-              :style="layer1"
-              src="https://jaromvogel.com/images/design/jumping_rabbit/page2layer1.png"
-              alt=""
-            >
-            <img
+    <div class="w-full h-full relative">
+        <h1 class="font-extrabold bg-clip-text text-transparent bg-conic-to-r from-yellow-500 via-indigo-500 to-green-500  text-3xl ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus, non? </h1>
+        <div ref="target" :style="targetStyle" class="">
+          <div :style="containerStyle" class="w-full">
+              <div :style="cardWindowStyle">
+                  <img
+                :style="layer0"
+                class="w-1/3"
+                src="person.svg"
+                alt=""
+              >
+              <img
               :style="layer2"
               src="https://jaromvogel.com/images/design/jumping_rabbit/page2layer2.png"
               alt=""
             >
-            </div>
-        </div>
+              </div>
+          </div>
+        </div> 
     </div>
-   </div> 
 </template>
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
@@ -40,12 +37,11 @@ const targetStyle: CSSProperties = {
 }
 const cardWindowStyle: CSSProperties = {
   overflow: 'hidden',
-  fontSize: '6rem',
   position: 'absolute',
-  top: 'calc(50% - 1em)',
-  left: 'calc(50% - 1em)',
-  height: '2em',
-  width: '2em',
+  top: 'calc(50%)',
+  left: 'calc(50%)',
+  height: '500px',
+  width: '500px',
   margin: 'auto',
 }
 const layerBase: CSSProperties = {
@@ -55,26 +51,12 @@ const layerBase: CSSProperties = {
   transition: '.3s ease-out all',
 }
 const containerStyle: CSSProperties = {
-  margin: '3em auto',
   perspective: '300px',
 }
-
-const infoStyle = computed(() => ({
-  opacity: 0.4,
-  top: '20px',
-  left: '40px',
-  position: isMobile.value ? 'inherit' : 'absolute',
-}))
 const layer0 = computed(() => ({
   ...layerBase,
   transform: `translateX(${parallax.tilt * 10}px) translateY(${
     parallax.roll * 10
-  }px) scale(1.33)`,
-}))
-const layer1 = computed(() => ({
-  ...layerBase,
-  transform: `translateX(${parallax.tilt * 20}px) translateY(${
-    parallax.roll * 20
   }px) scale(1.33)`,
 }))
 const layer2 = computed(() => ({

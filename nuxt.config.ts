@@ -1,16 +1,12 @@
 import Icons from 'unplugin-icons/vite'
 
 export default defineNuxtConfig({
+    ssr: true,
       meta: {
         lang: 'ru',
-        link: [
-            { rel: "stylesheet", href: "https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css" },
-        ],
-        script: [
-            { src: 'https://unpkg.com/flowbite@1.4.5/dist/flowbite.js' }
-        ]
     },
-    modules: ['@nuxtjs/color-mode','@nuxtjs/strapi','@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+    // css: ["assets/Golos-Text/Golos-Text_VF.css",],
+    modules: ['@nuxtjs/color-mode','@nuxtjs/strapi','@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxt/image-edge','nuxt-font-loader'],
     build: {
         postcss: {
           postcssOptions: {
@@ -20,8 +16,10 @@ export default defineNuxtConfig({
             },
           },
         },
-        transpile: ['@headlessui/vue']
-
+        transpile: ['@headlessui/vue'],
+        fontLoader: {
+          url: '~/assets/fonts/font-face.css',
+        }
       },
       strapi: {
         url: process.env.STRAPI_URL || 'http://localhost:1337',
@@ -43,5 +41,6 @@ export default defineNuxtConfig({
           }
         }
        },
+       
 })
  
